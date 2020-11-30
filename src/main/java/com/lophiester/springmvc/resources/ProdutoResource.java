@@ -15,7 +15,7 @@ public class ProdutoResource {
     @Autowired
     private ProdutoService produtoService;
 
-    @GetMapping(name = "/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Produto> findById(@PathVariable Integer id) {
         Produto obj = produtoService.findById(id);
         return ResponseEntity.ok().body(obj);
