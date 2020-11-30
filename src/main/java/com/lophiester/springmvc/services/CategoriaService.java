@@ -10,10 +10,10 @@ import java.util.Optional;
 @Service
 public class CategoriaService {
     @Autowired
-    private CategoriaRepository repo;
+    private CategoriaRepository categoriaRepository;
 
     public Categoria findById(Integer id) {
-        Optional<Categoria> obj = repo.findById(id);
+        Optional<Categoria> obj = categoriaRepository.findById(id);
         return obj.orElseThrow(null);
     }
 
