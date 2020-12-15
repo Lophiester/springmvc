@@ -12,17 +12,17 @@ public class Cidade implements Serializable {
     private Integer id;
     private String Nome;
 
-    @ManyToOne()
+    @ManyToOne
     @JsonIgnore
-    private Estado estados;
+     private Estado estado;
 
     public Cidade() {
     }
 
-    public Cidade(Integer id, String nome, Estado estados) {
+    public Cidade(Integer id, String nome, Estado estado) {
         this.id = id;
         Nome = nome;
-        this.estados = estados;
+        this.estado = estado;
     }
 
     public Integer getId() {
@@ -41,12 +41,12 @@ public class Cidade implements Serializable {
         Nome = nome;
     }
 
-    public Estado getEstados() {
-        return estados;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setEstados(Estado estados) {
-        this.estados = estados;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     @Override

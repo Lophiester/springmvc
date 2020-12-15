@@ -1,13 +1,8 @@
 package com.lophiester.springmvc;
 
-import com.lophiester.springmvc.domain.Categoria;
-import com.lophiester.springmvc.domain.Cidade;
-import com.lophiester.springmvc.domain.Estado;
-import com.lophiester.springmvc.domain.Produto;
-import com.lophiester.springmvc.repositories.CategoriaRepository;
-import com.lophiester.springmvc.repositories.CidadeRepository;
-import com.lophiester.springmvc.repositories.EstadoRepository;
-import com.lophiester.springmvc.repositories.ProdutoRepossitory;
+import com.lophiester.springmvc.domain.*;
+import com.lophiester.springmvc.repositories.*;
+import enums.TipoCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +20,10 @@ public class SpringmvcApplication implements CommandLineRunner {
     private EstadoRepository estadoRepository;
     @Autowired
     private CidadeRepository cidadeRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
 
     public static void main(String[] args) {
@@ -61,10 +60,20 @@ public class SpringmvcApplication implements CommandLineRunner {
 
         cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
 
-        est1.getCidades().addAll(Arrays.asList(cid1,cid2));
+        est1.getCidades().addAll(Arrays.asList(cid1, cid2));
         est2.getCidades().addAll(Arrays.asList(cid3));
 
+        Cliente cli1 = new Cliente(null, "Maria Ross", "maria@gmail.com", "1234567", TipoCliente.PESSOAFISICA);
+        Cliente cli2 = new Cliente(null, "Luna Mises", "luna@gmail.com", "1234567", TipoCliente.PESSOAFISICA);
 
+        cli1.getTelefones().addAll(Arrays.asList("08012345"));
+        cli2.getTelefones().addAll(Arrays.asList("09012345"));
+
+        Endereco e1 = new Endereco(null, "rua Flores", "300", "Apto 203", "Jardim", "070123450", cli1, cid1);
+        Endereco e2 = new Endereco(null, "rua Flores", "200", "Sala 203", "Centro", "070123450", cli1, cid2);
+
+        clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+        enderecoRepository.saveAll(Arrays.asList(e1, e2));
 
     }
 }
