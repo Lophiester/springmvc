@@ -1,6 +1,6 @@
 package com.lophiester.springmvc.domain;
 
-import enums.TipoCliente;
+import com.lophiester.springmvc.enums.TipoCliente;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +23,8 @@ public class Cliente implements Serializable {
     @ElementCollection
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
+    @OneToMany
+    private Set<Pedido>pedidos= new HashSet<>();
 
     public Cliente() {
     }
@@ -89,6 +91,14 @@ public class Cliente implements Serializable {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override

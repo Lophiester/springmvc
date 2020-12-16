@@ -2,7 +2,7 @@ package com.lophiester.springmvc;
 
 import com.lophiester.springmvc.domain.*;
 import com.lophiester.springmvc.repositories.*;
-import enums.TipoCliente;
+import com.lophiester.springmvc.enums.TipoCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
