@@ -1,10 +1,12 @@
 package com.lophiester.springmvc.domain;
 
-import com.lophiester.springmvc.enums.TipoCliente;
+import com.lophiester.springmvc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,12 +21,12 @@ public class Cliente implements Serializable {
     private Integer tipo;
 
     @OneToMany(mappedBy = "cliente")
-    private Set<Endereco> enderecos = new HashSet<>();
+    private List<Endereco> enderecos = new ArrayList<>();
     @ElementCollection
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
-    @OneToMany
-    private Set<Pedido>pedidos= new HashSet<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos= new ArrayList<>();
 
     public Cliente() {
     }
@@ -77,11 +79,11 @@ public class Cliente implements Serializable {
         this.tipo = tipo.getCod();
     }
 
-    public Set<Endereco> getEnderecos() {
+    public List<Endereco> getEnderecos() {
         return enderecos;
     }
 
-    public void setEnderecos(Set<Endereco> enderecos) {
+    public void Enderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
     }
 
@@ -93,11 +95,11 @@ public class Cliente implements Serializable {
         this.telefones = telefones;
     }
 
-    public Set<Pedido> getPedidos() {
+    public List<Pedido> getPedidos() {
         return pedidos;
     }
 
-    public void setPedidos(Set<Pedido> pedidos) {
+    public void setPedidos(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 

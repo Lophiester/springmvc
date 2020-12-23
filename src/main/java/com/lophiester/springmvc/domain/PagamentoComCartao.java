@@ -1,39 +1,27 @@
 package com.lophiester.springmvc.domain;
 
-import com.lophiester.springmvc.enums.EstadoPagemento;
+import com.lophiester.springmvc.domain.enums.EstadoPagemento;
 
-import java.util.Date;
+import javax.persistence.Entity;
 
-public class PagamentoComCartao extends Pagamento{
+@Entity
+public class PagamentoComCartao extends Pagamento {
 
-    private Date dataVencimento;
-    private Date dataPagamento;
+    private Integer numeroDeParcelas;
 
-
-    public PagamentoComCartao(Date dataVencimento, Date dataPagamento) {
-        this.dataVencimento = dataVencimento;
-        this.dataPagamento = dataPagamento;
+    public PagamentoComCartao() {
     }
 
-    public PagamentoComCartao(Integer id, EstadoPagemento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
+    public PagamentoComCartao(Integer id, EstadoPagemento estado, Pedido pedido, Integer numeroDeParcelas) {
         super(id, estado, pedido);
-        this.dataVencimento = dataVencimento;
-        this.dataPagamento = dataPagamento;
+        this.numeroDeParcelas = numeroDeParcelas;
     }
 
-    public Date getDataVencimento() {
-        return dataVencimento;
+    public Integer getNumeroDeParcelas() {
+        return numeroDeParcelas;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public Date getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
+    public void setNumeroDeParcelas(Integer numeroDeParcelas) {
+        this.numeroDeParcelas = numeroDeParcelas;
     }
 }

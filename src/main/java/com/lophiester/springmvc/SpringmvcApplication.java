@@ -1,13 +1,15 @@
 package com.lophiester.springmvc;
 
 import com.lophiester.springmvc.domain.*;
+import com.lophiester.springmvc.domain.enums.EstadoPagemento;
+import com.lophiester.springmvc.domain.enums.TipoCliente;
 import com.lophiester.springmvc.repositories.*;
-import com.lophiester.springmvc.enums.TipoCliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -15,7 +17,7 @@ public class SpringmvcApplication implements CommandLineRunner {
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
-    private ProdutoRepossitory produtoRepossitory;
+    private ProdutoRepository produtoRepository;
     @Autowired
     private EstadoRepository estadoRepository;
     @Autowired
@@ -24,6 +26,10 @@ public class SpringmvcApplication implements CommandLineRunner {
     private ClienteRepository clienteRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
 
     public static void main(String[] args) {
@@ -47,7 +53,7 @@ public class SpringmvcApplication implements CommandLineRunner {
         p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
         p3.getCategorias().addAll(Arrays.asList(cat1));
 
-        produtoRepossitory.saveAll(Arrays.asList(p1, p2, p3));
+        produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 
         Estado est1 = new Estado(null, "Sao Paulo");
         Estado est2 = new Estado(null, "Minas Gerais");
@@ -74,6 +80,22 @@ public class SpringmvcApplication implements CommandLineRunner {
 
         clienteRepository.saveAll(Arrays.asList(cli1, cli2));
         enderecoRepository.saveAll(Arrays.asList(e1, e2));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        Pedido ped1 = new Pedido(null, sdf.parse("20/12/2020 10:00"), cli1, e1);
+        Pedido ped2 = new Pedido(null, sdf.parse("21/12/2020 22:00"), cli1, e2);
+
+        Pagamento pagto1 = new PagamentoComCartao(null,EstadoPagemento.QUITADO,ped1,6);
+        ped1.setPagamento(pagto1);
+
+        Pagamento pagto2= new PagamentoComBoleto(null,EstadoPagemento.PENDENTE,ped2,sdf.parse("22/12/2020 00:00"),null);
+        ped2.setPagamento(pagto2);
+
+        cli1.getPedidos().addAll(Arrays.asList(ped1,ped2));
+
+        pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
+        pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
+
 
     }
 }

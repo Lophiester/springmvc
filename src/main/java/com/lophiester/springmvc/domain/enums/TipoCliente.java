@@ -1,23 +1,23 @@
-package com.lophiester.springmvc.enums;
+package com.lophiester.springmvc.domain.enums;
 
-public enum EstadoPagemento {
+public enum TipoCliente {
 
-    PAGAMENTOCOMBOLETO(1, "Pagamento com Boleto"),
-    PAGAMENTOCOMCARTAO(2, "Pagamento com Cartao");
+    PESSOAFISICA(1, "Pessoa Fisica"),
+    PESSOAJURIDICA(2, "Pessoa Juridica");
 
     private Integer cod;
     private String descricao;
 
-    EstadoPagemento(Integer cod, String descricao) {
+    TipoCliente(Integer cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
 
-    public static EstadoPagemento toEnum(Integer cod) {
+    public static TipoCliente toEnum(Integer cod) {
         if (cod == null) {
             return null;
         }
-        for (EstadoPagemento x : EstadoPagemento.values()) {
+        for (TipoCliente x : TipoCliente.values()) {
             if (cod.equals(x.getCod())) {
                 return x;
             }

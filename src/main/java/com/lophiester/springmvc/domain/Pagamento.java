@@ -1,15 +1,16 @@
 package com.lophiester.springmvc.domain;
 
-import com.lophiester.springmvc.enums.EstadoPagemento;
+import com.lophiester.springmvc.domain.enums.EstadoPagemento;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Pagamento implements Serializable {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Pagamento implements Serializable {
     @Id
     private Integer id;
-    private EstadoPagemento estado;
+    private Integer estado;
 
     @OneToOne
     @MapsId
@@ -21,7 +22,7 @@ public class Pagamento implements Serializable {
 
     public Pagamento(Integer id, EstadoPagemento estado, Pedido pedido) {
         this.id = id;
-        this.estado = estado;
+        this.estado = estado.getCod();
         this.pedido = pedido;
     }
 
@@ -34,11 +35,11 @@ public class Pagamento implements Serializable {
     }
 
     public EstadoPagemento getEstado() {
-        return estado;
+        return EstadoPagemento.toEnum(estado);
     }
 
     public void setEstado(EstadoPagemento estado) {
-        this.estado = estado;
+        this.estado = estado.getCod();
     }
 
     public Pedido getPedido() {

@@ -1,25 +1,39 @@
 package com.lophiester.springmvc.domain;
 
-import com.lophiester.springmvc.enums.EstadoPagemento;
+import com.lophiester.springmvc.domain.enums.EstadoPagemento;
 
+import javax.persistence.Entity;
+import java.util.Date;
+
+@Entity
 public class PagamentoComBoleto extends Pagamento {
 
-    private Integer numeroDeParcelas;
+    private Date dataVencimento;
+    private Date dataPagamento;
 
-    public PagamentoComBoleto(Integer numeroDeParcelas) {
-        this.numeroDeParcelas = numeroDeParcelas;
+
+    public PagamentoComBoleto() {
     }
 
-    public PagamentoComBoleto(Integer id, EstadoPagemento estado, Pedido pedido, Integer numeroDeParcelas) {
+    public PagamentoComBoleto(Integer id, EstadoPagemento estado, Pedido pedido, Date dataVencimento, Date dataPagamento) {
         super(id, estado, pedido);
-        this.numeroDeParcelas = numeroDeParcelas;
+        this.dataVencimento = dataVencimento;
+        this.dataPagamento = dataPagamento;
     }
 
-    public Integer getNumeroDeParcelas() {
-        return numeroDeParcelas;
+    public Date getDataVencimento() {
+        return dataVencimento;
     }
 
-    public void setNumeroDeParcelas(Integer numeroDeParcelas) {
-        this.numeroDeParcelas = numeroDeParcelas;
+    public void setDataVencimento(Date dataVencimento) {
+        this.dataVencimento = dataVencimento;
+    }
+
+    public Date getDataPagamento() {
+        return dataPagamento;
+    }
+
+    public void setDataPagamento(Date dataPagamento) {
+        this.dataPagamento = dataPagamento;
     }
 }
