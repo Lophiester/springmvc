@@ -17,4 +17,18 @@ public class CategoriaService {
         return obj.orElseThrow(null);
     }
 
+    public Categoria insert(Categoria obj) {
+        obj.setId(null);
+        return categoriaRepository.save(obj);
+    }
+
+    public Categoria update(Categoria obj) {
+        findById(obj.getId());
+        return categoriaRepository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        findById(id);
+        categoriaRepository.deleteById(id);
+    }
 }
