@@ -1,5 +1,6 @@
 package com.lophiester.springmvc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lophiester.springmvc.domain.enums.EstadoPagemento;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ public abstract class Pagamento implements Serializable {
     @Id
     private Integer id;
     private Integer estado;
-
+    @JsonIgnore
     @OneToOne
     @MapsId
     @JoinColumn(name = "pedido_id")

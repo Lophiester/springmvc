@@ -1,5 +1,6 @@
 package com.lophiester.springmvc.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lophiester.springmvc.domain.enums.EstadoPagemento;
 
 import javax.persistence.Entity;
@@ -7,8 +8,9 @@ import java.util.Date;
 
 @Entity
 public class PagamentoComBoleto extends Pagamento {
-
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataVencimento;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date dataPagamento;
 
 
