@@ -4,6 +4,8 @@ import com.lophiester.springmvc.domain.Categoria;
 import com.lophiester.springmvc.dto.CategoriaDTO;
 import com.lophiester.springmvc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,10 +26,20 @@ public class CategoriaResource {
         return ResponseEntity.ok().body(obj);
     }
     @GetMapping
-    public ResponseEntity<List<CategoriaDTO>>list(){
+    public ResponseEntity<List<CategoriaDTO>>findAll(){
         List<Categoria>list= categoriaService.findAll();
         List<CategoriaDTO>listDTO= list.stream().map(categoria -> new CategoriaDTO(categoria)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDTO);
+    }
+    @GetMapping(value = "/pages")
+    public ResponseEntity<Page<CategoriaDTO>>findPage(
+           @RequestParam(value = "page", defaultValue = "0") Integer page,
+           @RequestParam (value = "size",defaultValue = "24")Integer size,
+           @RequestParam(value = "direction", defaultValue = "ASC")  Sort.Direction direction,
+           @RequestParam(value = "orderBy",defaultValue = "name")   String orderBy){
+        Page<Categoria>list= categoriaService.findPage(page,size,direction,orderBy);
+        Page<CategoriaDTO>listDto= list.map(categoria -> new CategoriaDTO(categoria));
+        return ResponseEntity.ok().body(listDto);
     }
 
     @PostMapping

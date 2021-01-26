@@ -41,8 +41,15 @@ public class SpringmvcApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         Categoria cat1 = new Categoria(null, "Informatica");
-        Categoria cat2 = new Categoria(null, "Escitorio");
-        categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
+        Categoria cat2 = new Categoria(null, "Escritorio");
+        Categoria cat3 = new Categoria(null, "Cama mesa e banho");
+        Categoria cat4 = new Categoria(null, "Eletronicos");
+        Categoria cat5 = new Categoria(null, "Jardinagem");
+        Categoria cat6 = new Categoria(null, "Decoracao");
+        Categoria cat7 = new Categoria(null, "Perfumaria");
+
+        categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
+
 
         Produto p1 = new Produto(null, "Computador", 2000.00);
         Produto p2 = new Produto(null, "Impressora", 800.00);
