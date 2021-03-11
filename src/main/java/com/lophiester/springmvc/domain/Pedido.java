@@ -1,7 +1,6 @@
 package com.lophiester.springmvc.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,16 +26,24 @@ public class Pedido implements Serializable {
     private Endereco enderecoDeEntrega;
 
     @OneToMany(mappedBy = "id.pedido")
-    private Set<ItemPedido> itens= new HashSet<>();
+    private Set<ItemPedido> itens = new HashSet<>();
 
     public Pedido() {
     }
 
     public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
-        this.id = id;
-        this.instante = instante;
-        this.cliente = cliente;
+        this.id                = id;
+        this.instante          = instante;
+        this.cliente           = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    public double getTotal() {
+        double soma = 0;
+        for (ItemPedido ip : itens) {
+            soma = soma + ip.getSubTotal();
+        }
+        return soma;
     }
 
     public Integer getId() {
